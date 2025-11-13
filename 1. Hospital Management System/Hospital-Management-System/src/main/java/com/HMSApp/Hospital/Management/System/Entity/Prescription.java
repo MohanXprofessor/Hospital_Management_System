@@ -33,13 +33,6 @@ public class Prescription {
     @JsonIgnore 
     private Appointment appointment; // assume exists
 
-    @ManyToOne(optional = false) 
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor; // assume exists
-
-    @ManyToOne(optional = false) 
-    @JoinColumn(name = "patient_id")
-    private Patient patient; // assume exists
 
     private LocalDate issuedDate;
 
@@ -54,4 +47,24 @@ public class Prescription {
         item.setPrescription(this);
         this.items.add(item);
     }
+    
+    @ManyToOne(optional = false) 
+    @JoinColumn(name = "doctor_id")
+    @JsonIgnore
+    private Doctor doctor;
+
+    @ManyToOne(optional = false) 
+    @JoinColumn(name = "patient_id")
+    @JsonIgnore
+    private Patient patient;
+
+    // Expose IDs instead of serializing whole entities
+    public Long getDoctorId() {
+        return doctor == null ? null : doctor.getId();
+    }
+
+    public Long getPatientId() {
+        return patient == null ? null : patient.getId();
+    }
+
 }

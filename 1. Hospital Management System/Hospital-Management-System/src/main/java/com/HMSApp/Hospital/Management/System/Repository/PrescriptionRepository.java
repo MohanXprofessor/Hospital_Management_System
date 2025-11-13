@@ -9,7 +9,7 @@ import com.HMSApp.Hospital.Management.System.Entity.Prescription;
 public interface PrescriptionRepository extends JpaRepository<Prescription, Long> {
 
 	
-		List<Prescription> findByPatientId(Long patientId);
-		
-	    List<Prescription> findByAppointmentId(Long appointmentId);
+	 List<Prescription> findByPatient_Id(Long patientId);
+	    List<Prescription> findByDoctor_Id(Long doctorId);
+	    List<Prescription> findByAppointment_Id(Long appointmentId);
 }
