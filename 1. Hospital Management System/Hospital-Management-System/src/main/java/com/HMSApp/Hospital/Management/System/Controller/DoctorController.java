@@ -37,7 +37,7 @@ public class DoctorController {
         Doctor saved = docService.saveDoctor(doctor);
         // Build Location: /api/doctors/{id}
         return ResponseEntity
-                .created(URI.create("/api/doctors/" + saved.getDoctor_id()))
+                .created(URI.create("/api/doctors/" + saved.getId()))
                 .body(saved);
     }
 	

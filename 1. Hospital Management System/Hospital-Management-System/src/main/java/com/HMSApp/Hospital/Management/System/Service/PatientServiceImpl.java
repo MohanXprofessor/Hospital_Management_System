@@ -20,7 +20,7 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public Patient create(Patient request) {
-        request.setPatient_id(null); // ensure new record
+        request.setId(null); // ensure new record
         return patientRepo.save(request);
     }
 

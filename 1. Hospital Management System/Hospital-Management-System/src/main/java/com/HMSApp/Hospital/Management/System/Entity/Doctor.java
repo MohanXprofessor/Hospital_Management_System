@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.HMSApp.Hospital.Management.System.Enum.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,6 +38,7 @@ import lombok.ToString;
 @Entity
 @Data
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="Doctors")
@@ -44,7 +46,7 @@ public class Doctor {
 	
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long doctor_id;
+	    private Long id;
 
 	    // Doctor name
 	    @NotBlank(message = "Doctor name is required")

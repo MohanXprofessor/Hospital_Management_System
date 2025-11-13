@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.HMSApp.Hospital.Management.System.Enum.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -28,13 +29,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "patients")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long patient_id;
+    private Long id;
 
     @NotBlank
     private String name;

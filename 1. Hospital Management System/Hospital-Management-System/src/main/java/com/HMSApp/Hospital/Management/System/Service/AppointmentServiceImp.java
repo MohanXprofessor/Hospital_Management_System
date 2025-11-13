@@ -44,16 +44,16 @@ public class AppointmentServiceImp implements AppointmentService{
         if (request == null) {
             throw new IllegalArgumentException("Appointment request cannot be null");
         }
-        if (request.getDoctor() == null || request.getDoctor().getDoctor_id() == null) {
+        if (request.getDoctor() == null || request.getDoctor().getId() == null) {
             throw new IllegalArgumentException("doctorId is required on the appointment");
         }
-        if (request.getPatient() == null || request.getPatient().getPatient_id() == null) {
+        if (request.getPatient() == null || request.getPatient().getId() == null) {
             throw new IllegalArgumentException("patientId is required on the appointment");
         }
 
         // Load doctor and patient from DB (ensures they exist)
-        Long doctorId = request.getDoctor().getDoctor_id();
-        Long patientId = request.getPatient().getPatient_id();
+        Long doctorId = request.getDoctor().getId();
+        Long patientId = request.getPatient().getId();
 
         Doctor doctor = docRepo.findById(doctorId)
                 .orElseThrow(() -> new IllegalArgumentException("Doctor not found with id: " + doctorId));
@@ -70,7 +70,7 @@ public class AppointmentServiceImp implements AppointmentService{
         }
 
         // Ensure JPA will create a new row (not update)
-        request.setAppointment_id(null);
+        request.setId(null);
 
         // Attach managed doctor and patient entity instances to the appointment
         request.setDoctor(doctor);

@@ -3,7 +3,8 @@ package com.HMSApp.Hospital.Management.System.Entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import com.HMSApp.Hospital.Management.System.Enum.AppointmentStatus;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Builder
 @NoArgsConstructor
 @Table(name="appointments")
@@ -32,7 +34,7 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long appointment_id;
+    private Long id;
 
     private LocalDate date;
     private LocalTime time;
@@ -45,10 +47,12 @@ public class Appointment {
     
     //Each appointment belong to one Doctor
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore 
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore 
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
